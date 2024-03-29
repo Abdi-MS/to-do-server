@@ -3,8 +3,6 @@ import { EditedTodoType, ToDoType } from "../types/types";
 import { Request, Response, Router } from "express";
 import { Document } from "mongoose";
 
-const todoRouter = Router();
-
 const getAllToDos = (req: Request, res: Response) => {
   ToDo.find()
     .then((users: Document<any, any, ToDoType>[] | null) => res.json(users))

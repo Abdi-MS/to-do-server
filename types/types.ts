@@ -18,3 +18,14 @@ export type mongoToDo = {
   text: string;
   checked: boolean;
 };
+
+export type UserType = {
+  email: string;
+  name: string;
+  password: string;
+}
+
+export type LogInUserType = {
+  email: string;
+  password: string;
+}
