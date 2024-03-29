@@ -9,14 +9,14 @@ import {
 
 const todoRouter = Router();
 
-todoRouter.get("/toDos", (req, res) => getAllToDos(req, res));
+todoRouter.get("/toDos", getAllToDos);
 
-todoRouter.get("/toDos/:id", (req, res) => getToDoByID(req, res));
+todoRouter.get("/toDos/:id", getToDoByID);
 
-todoRouter.post("/toDos", (req, res) => postToDo(req, res));
+todoRouter.post("/toDos", postToDo);
 
-todoRouter.put("/toDos/:id", (req, res) => updateToDo(req, res));
+todoRouter.put("/toDos/:id", updateToDo);
 
-todoRouter.delete("/toDos/:id", (req, res) => deleteToDo(req, res));
+todoRouter.delete("/toDos/:id", deleteToDo);
 
 export default todoRouter;
