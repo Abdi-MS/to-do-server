@@ -7,17 +7,11 @@ import { Document } from "mongoose";
 const signUp = (req: Request, res: Response) => {
   let { email, name, password } = req.body;
   const hashedPassword = generate(password);
-  let newUserObj: UserType = {
-    password: hashedPassword,
+  let newUser = new User({
     email: email,
     name: name,
-  };
-  let newUser = new User(newUserObj);
-  console.log("email:", email);
-  console.log("name:", name);
-  console.log("password:", password);
-  console.log("new user: ");
-  console.log(newUser);
+    password: hashedPassword,
+  });
   newUser
     .save()
     .then((newUser: Document<any, any, UserType>) => res.json(newUser))
