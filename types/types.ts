@@ -29,3 +29,11 @@ export type LogInUserType = {
   email: string;
   password: string;
 }
+
+export type mongoUser = {
+  _id: mongoose.Types.ObjectId;
+  email: string;
+  name: string;
+  password: string;
+
+}

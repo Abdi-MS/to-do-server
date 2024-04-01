@@ -1,4 +1,4 @@
-import { signUp, logIn } from "../api_functions/UserAPIFunctions";
+import { signUp, logIn } from "../api_functions/UserRouteHandlers";
 import { Router } from "express";
 
 const userRouter = Router();
