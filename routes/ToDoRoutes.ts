@@ -5,9 +5,12 @@ import {
   postToDo,
   updateToDo,
   deleteToDo,
-} from "../api_functions/ToDoAPIFunctions";
+} from "../routeHandlers/ToDoRouteHandlers";
+import verifyToken from "../functions/verifyJWT";
 
 const todoRouter = Router();
+
+todoRouter.use(verifyToken)
 
 todoRouter.get("/toDos", getAllToDos);
 

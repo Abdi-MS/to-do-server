@@ -4,19 +4,22 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./connectDb";
 import todoRouter from "./routes/ToDoRoutes";
+import userRouter from "./routes/UserRoutes";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
-const app = express();
-app.use(cors());
-
 const PORT = process.env.SERVER_PORT || 3000;
+const app = express();
 
-app.use(bodyParser.json());
 connectDB();
+
+app.use(cors());
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use("/auth", userRouter);
+app.use("/", todoRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-app.use('/', todoRouter)
-
