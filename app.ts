@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import connectDB from "./connectDb";
 import todoRouter from "./routes/ToDoRoutes";
 import userRouter from "./routes/UserRoutes";
+import verifyToken from "./middlewareFunction/verifyJWT";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,7 +16,9 @@ const app = express();
 connectDB();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(verifyToken);
 app.use("/", todoRouter);
 app.use("/auth", userRouter);
 

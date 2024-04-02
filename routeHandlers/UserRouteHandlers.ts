@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/UserModel";
 import { generate, verify } from "password-hash";
-import { LogInUserType, UserType, mongoUser } from "../types/types";
+import { LogInUserType, UserType, mongoUser, userTokenDataType } from "../types/types";
 import { Document } from "mongoose";
 import * as jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -34,7 +34,7 @@ const logIn = (req: Request, res: Response) => {
         email: targetUser.email,
         password: targetUser.password,
       };
-      const userTokenData = {
+      const userTokenData:userTokenDataType = {
         email: targetUser.email,
         id: targetUser._id.toString(),
       };
@@ -43,7 +43,7 @@ const logIn = (req: Request, res: Response) => {
       if (match) {
         res
           .cookie("token", token, { httpOnly: true })
-          .json({ authorized: true, token });
+          .json({ authorized: true });
       } else {
         res.json({ authorized: false, message: "Password mis-match" });
       }

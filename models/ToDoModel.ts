@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 interface IToDo extends Document {
   text: string;
   checked: boolean;
+  user: string;
 }
 
 const ToDoSchema: Schema = new Schema({
@@ -18,6 +19,10 @@ const ToDoSchema: Schema = new Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  user: {
+    type: String,
+    required: true,
   },
 });
 
