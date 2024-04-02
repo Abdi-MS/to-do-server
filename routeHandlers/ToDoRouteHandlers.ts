@@ -1,6 +1,6 @@
 import ToDo from "../models/ToDoModel";
-import { EditedTodoType, ToDoType, userTokenDataType } from "../types/types";
-import { Request, Response, Router } from "express";
+import { ToDoType, userTokenDataType } from "../types/types";
+import { Request, Response } from "express";
 import { Document } from "mongoose";
 
 const getAllToDos = (req: Request, res: Response) => {

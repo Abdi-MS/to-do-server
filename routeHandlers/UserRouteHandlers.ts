@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/UserModel";
-import { generate, verify } from "password-hash";
+import { generateHash, verifyHash } from "../functions/hash";
 import { LogInUserType, UserType, mongoUser, userTokenDataType } from "../types/types";
 import { Document } from "mongoose";
 import * as jwt from "jsonwebtoken";
@@ -12,7 +12,7 @@ const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
 
 const signUp = (req: Request, res: Response) => {
   let { email, name, password } = req.body;
-  const hashedPassword = generate(password);
+  const hashedPassword = generateHash(password);
   let newUser = new User({
     email: email,
     name: name,
@@ -39,7 +39,7 @@ const logIn = (req: Request, res: Response) => {
         id: targetUser._id.toString(),
       };
       const token = jwt.sign(userTokenData, JWT_PRIVATE_KEY);
-      const match = verify(password, targetUserData.password);
+      const match = verifyHash(password, targetUserData.password);
       if (match) {
         res
           .cookie("token", token, { httpOnly: true })

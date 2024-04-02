@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./connectDb";
 import todoRouter from "./routes/ToDoRoutes";
 import userRouter from "./routes/UserRoutes";
-import verifyToken from "./middlewareFunction/verifyJWT";
+import verifyToken from "./functions//verifyJWT";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -18,9 +18,9 @@ connectDB();
 app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use("/auth", userRouter);
 app.use(verifyToken);
 app.use("/", todoRouter);
-app.use("/auth", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
