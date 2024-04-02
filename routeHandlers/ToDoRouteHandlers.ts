@@ -1,4 +1,5 @@
 import ToDo from "../models/ToDoModel";
+import User from "../models/UserModel";
 import { ToDoType, userTokenDataType } from "../types/types";
 import { Request, Response } from "express";
 import { Document } from "mongoose";
@@ -29,13 +30,15 @@ const getToDoByID = (req: Request, res: Response) => {
 const postToDo = (req: Request, res: Response) => {
   const { id, text, checked, user }: ToDoType & { user: userTokenDataType } =
     req.body;
-  const newToDo = new ToDo({ id, text, checked, user: user.id });
-  newToDo
-    .save()
-    .then((savedToDo: Document<any, any, ToDoType> | null) => {
-      res.json(savedToDo);
-    })
-    .catch((error: Error) => res.status(500).json({ error: error.message }));
+  const targetUser = User.findById(user.id).then((targetUser) => {
+    const newToDo = new ToDo({ id, text, checked, user: targetUser?._id });
+    newToDo
+      .save()
+      .then((savedToDo: Document<any, any, ToDoType> | null) => {
+        res.json(savedToDo);
+      })
+      .catch((error: Error) => res.status(500).json({ error: error.message }));
+  });
 };
 
 const updateToDo = (req: Request, res: Response) => {

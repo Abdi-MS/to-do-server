@@ -21,7 +21,7 @@ const ToDoSchema: Schema = new Schema({
     default: false,
   },
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
 });
