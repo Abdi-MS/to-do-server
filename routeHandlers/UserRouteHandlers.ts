@@ -38,9 +38,9 @@ const logIn = (req: Request, res: Response) => {
         email: targetUser.email,
         id: targetUser._id.toString(),
       };
-      const token = jwt.sign(userTokenData, JWT_PRIVATE_KEY);
       const match = verifyHash(password, targetUserData.password);
       if (match) {
+        const token = jwt.sign(userTokenData, JWT_PRIVATE_KEY);
         res
           .cookie("token", token, { httpOnly: true })
           .json({ authorized: true });

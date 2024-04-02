@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import connectDB from "./connectDb";
 import todoRouter from "./routes/ToDoRoutes";
 import userRouter from "./routes/UserRoutes";
-import verifyToken from "./functions//verifyJWT";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -19,7 +18,6 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use("/auth", userRouter);
-app.use(verifyToken);
 app.use("/", todoRouter);
 
 app.listen(PORT, () => {
